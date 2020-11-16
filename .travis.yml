@@ -4,5 +4,5 @@ python:
 install:
   - pip freeze > requirements.txt
 script:
-  - python sq.py test
+  #- python sq.py test
   - python prime.py test
