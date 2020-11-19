@@ -1,17 +1,22 @@
-version: '5'
+version: '3'
 
 services:
   db:
     image: postgres
   migration:
     build: .
-    command:
-    volumes:
-      - .:/home/jim/Tjs/Hiw
-    depends_on:
-      - db
+      command: python3 manage.py migrate
+      volumes:
+        - .:/home/jim/Tjs/Hiw
+      depends_on:
+        - db
   web:
     build: .
-    command:
+    command: python3 prime.py runserver 0.0.0.0:8080
     volumes:
-    -
+      - .:/home/jim/Tjs/Hiw
+    ports:
+      - "8080:8000"
+    depends_on:
+      - db
+      - migration
